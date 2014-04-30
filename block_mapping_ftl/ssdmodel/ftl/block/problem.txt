@@ -1,0 +1,11 @@
+  // in disksim_logorg.c 파일
+   if (currlogorg->stat.outstanding >= MAX_QUEUE_LENGTH) {
+      fprintf(stderr,"Stopping simulation because of saturation: simtime %f, totalreqs %d\n", simtime, disksim->totalreqs);
+      fflush(stderr);
+      fprintf (outputfile, "Stopping simulation because of saturation: simtime %f, totalreqs %d\n", simtime, disksim->totalreqs);
+      fprintf (outputfile, "last request:  dev=%d, blk=%d, cnt=%d, %d (R==1)\n",curr->devno, curr->blkno, curr->bcount, (curr->flags & READ));
+      disksim_simstop();
+   }
+   
+   이 구문에 의해 시뮬레이션이 멈춤.
+   이유 : 큐의 길이가 너무 길어서
